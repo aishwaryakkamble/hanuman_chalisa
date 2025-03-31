@@ -12,55 +12,35 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
-    <style>
-      body {
-        font-family: "Tiro Devanagari Hindi", serif;
-        background-color: #ffe4b5;
-        text-align: center;
-        padding: 20px;
-      }
-      
-      .container {
-        max-width: 700px;
-        margin: auto;
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      }
-      h1 {
-        color: #d32f2f;
-      }
-      .chalisa {
-        font-size: 20px;
-        line-height: 1.8;
-        color: #5d4037;
-      }
-      .meaning {
-        display: none;
-        font-size: 16px;
-        color: #333;
-        margin-top: 5px;
-      }
-      .btn-meaning {
-        background: none;
-        border: none;
-        font-size: 18px;
-        cursor: pointer;
-        color: #007bff;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="container">
+      <div class="toolbar">
+        <div class="toggle-switch form-check form-switch">
+          <label class="form-check-label" for="toggleMeanings">अर्थ:</label>
+          <input class="form-check-input" type="checkbox" id="toggleMeanings" onchange="toggleAllMeanings()" />
+        </div>
+        
+        <div class="audio-player">
+          <button id="playPauseButton" onclick="togglePlayPause()">Play ▶️</button>
+          <input type="range" id="seekbar" value="0" step="1" min="0" max="100" onchange="seekAudio()" />
+          <span id="current-time">00:00</span>/<span id="duration">00:00</span>
+        </div>
+        
+        <div class="button-group">
+          <button onclick="downloadPDF()">Download</button>
+          <button onclick="shareLink()">Share</button>
+        </div>
+      </div>
+      
       <h1>हनुमान चालीसा</h1>
       <div class="chalisa">
-        <p>
+        <strong><p>
           श्रीगुरु चरन सरोज रज, निज मनु मुकुरु सुधारि।
-          <button class="btn-meaning" onclick="toggleMeaning(1)">📖</button
-          ><br />
+  <br />
           बरनऊँ रघुबर बिमल जसु, जो दायकु फल चारि॥
-        </p>
+        </p></strong>
         <p class="meaning" id="meaning-1">
           <strong>अर्थ: </strong> श्रीगुरु के चरण कमलों की धूल से अपने मन रूपी
           दर्पण को स्वच्छ करके, <br />मैं श्रीरामचन्द्रजी के निर्मल यश का वर्णन
@@ -68,12 +48,11 @@
           है।
         </p>
 
-        <p>
+      <strong><p>
           बुद्धिहीन तनु जानिके, सुमिरौं पवन-कुमार।
-          <button class="btn-meaning" onclick="toggleMeaning(2)">📖</button
-          ><br />
+  <br />
           बल बुद्धि विद्या देहु मोहिं, हरहु कलेश विकार॥
-        </p>
+        </p></strong>
         <p class="meaning" id="meaning-2">
           <strong>अर्थ: </strong>मैं अपने को बुद्धिहीन जानकर पवनसुत हनुमानजी का
           स्मरण करता हूँ।<br />
@@ -82,8 +61,7 @@
 
         <p>
           जय हनुमान ज्ञान गुन सागर।
-          <button class="btn-meaning" onclick="toggleMeaning(3)">📖</button
-          ><br />
+  <br />
           जय कपीस तिहु लोक उजागर ॥ 1॥
         </p>
         <p class="meaning" id="meaning-3">
@@ -93,8 +71,7 @@
 
         <p>
           राम दूत अतुलित बल धामा ।
-          <button class="btn-meaning" onclick="toggleMeaning(4)">📖</button
-          ><br />
+  <br />
           अंजनि पुत्र पवनसुत नामा ॥ 2 ॥
         </p>
         <p class="meaning" id="meaning-4">
@@ -104,8 +81,7 @@
 
         <p>
           महाबीर बिक्रम बजरंगी ।
-          <button class="btn-meaning" onclick="toggleMeaning(5)">📖</button
-          ><br />
+  <br />
           कुमति निवार सुमति के संगी ॥ 3 ॥
         </p>
         <p class="meaning" id="meaning-5">
@@ -116,8 +92,7 @@
 
         <p>
           कंचन बरन बिराज सुबेसा ।
-          <button class="btn-meaning" onclick="toggleMeaning(6)">📖</button
-          ><br />
+  <br />
           कानन कुण्डल कुंचित केसा ॥ 4 ॥
         </p>
         <p class="meaning" id="meaning-6">
@@ -127,8 +102,7 @@
 
         <p>
           हाथ बज्र औ ध्वजा बिराजै ।
-          <button class="btn-meaning" onclick="toggleMeaning(7)">📖</button
-          ><br />
+  <br />
           कांधे मूंज जनेउ साजै ॥ 5 ॥
         </p>
         <p class="meaning" id="meaning-7">
@@ -138,8 +112,7 @@
 
         <p>
           शंकर सुवन केसरी नंदन ।
-          <button class="btn-meaning" onclick="toggleMeaning(8)">📖</button
-          ><br />
+  <br />
           तेज प्रताप महा जग बंदन ॥ 6 ॥
         </p>
         <p class="meaning" id="meaning-8">
@@ -150,8 +123,7 @@
 
         <p>
           विद्यावान गुनी अति चातुर ।
-          <button class="btn-meaning" onclick="toggleMeaning(9)">📖</button
-          ><br />
+  <br />
           राम काज करिबे को आतुर ॥ 7 ॥
         </p>
         <p class="meaning" id="meaning-9">
@@ -162,8 +134,7 @@
 
         <p>
           प्रभु चरित्र सुनिबे को रसिया ।
-          <button class="btn-meaning" onclick="toggleMeaning(10)">📖</button
-          ><br />
+  <br />
           राम लखन सीता मन बसिया ॥ 8 ॥
         </p>
         <p class="meaning" id="meaning-10">
@@ -175,8 +146,7 @@
 
         <p>
           सूक्ष्म रूप धरि सियहिं दिखावा ।
-          <button class="btn-meaning" onclick="toggleMeaning(11)">📖</button
-          ><br />
+  <br />
           बिकट रूप धरि लंक जरावा ॥ 9 ॥
         </p>
         <p class="meaning" id="meaning-11">
@@ -188,8 +158,7 @@
 
         <p>
           भीम रूप धरि असुर संहारे ।
-          <button class="btn-meaning" onclick="toggleMeaning(12)">📖</button
-          ><br />
+  <br />
           रामचन्द्र के काज संवारे ॥ 10 ॥
         </p>
         <p class="meaning" id="meaning-12">
@@ -201,8 +170,7 @@
 
         <p>
           लाय सजीवन लखन जियाए ।
-          <button class="btn-meaning" onclick="toggleMeaning(13)">📖</button
-          ><br />
+  <br />
           श्री रघुबीर हरषि उर लाए ॥ 11 ॥
         </p>
         <p class="meaning" id="meaning-13">
@@ -214,8 +182,7 @@
 
         <p>
           रघुपति कीन्ही बहुत बड़ाई ।
-          <button class="btn-meaning" onclick="toggleMeaning(14)">📖</button
-          ><br />
+  <br />
           तुम मम प्रिय भरतहि सम भाई ॥ 12 ॥
         </p>
         <p class="meaning" id="meaning-14">
@@ -226,8 +193,7 @@
 
         <p>
           सहस बदन तुम्हरो जस गावैं ।
-          <button class="btn-meaning" onclick="toggleMeaning(15)">📖</button
-          ><br />
+  <br />
           अस कहि श्रीपति कंठ लगावैं ॥ 13 ॥
         </p>
         <p class="meaning" id="meaning-15">
@@ -240,8 +206,7 @@
 
         <p>
           सनकादिक ब्रह्मादि मुनीसा ।
-          <button class="btn-meaning" onclick="toggleMeaning(16)">📖</button
-          ><br />
+  <br />
           नारद सारद सहित अहीसा ॥ 14 ॥
         </p>
         <p class="meaning" id="meaning-16">
@@ -253,8 +218,7 @@
 
         <p>
           जम कुबेर दिगपाल जहां ते ।
-          <button class="btn-meaning" onclick="toggleMeaning(17)">📖</button
-          ><br />
+  <br />
           कबि कोबिद कहि सके कहां ते ॥ 15 ॥
         </p>
         <p class="meaning" id="meaning-17">
@@ -266,8 +230,7 @@
 
         <p>
           तुम उपकार सुग्रीवहिं कीन्हा ।
-          <button class="btn-meaning" onclick="toggleMeaning(18)">📖</button
-          ><br />
+  <br />
           राम मिलाय राज पद दीन्हा ॥ 16 ॥
         </p>
         <p class="meaning" id="meaning-18">
@@ -277,8 +240,7 @@
 
         <p>
           तुम्हरो मंत्र बिभीषण माना ।
-          <button class="btn-meaning" onclick="toggleMeaning(19)">📖</button
-          ><br />
+  <br />
           लंकेश्वर भए सब जग जाना ॥ 17 ॥
         </p>
         <p class="meaning" id="meaning-19">
@@ -290,8 +252,7 @@
 
         <p>
           युग सहस्र जोजन पर भानू ।
-          <button class="btn-meaning" onclick="toggleMeaning(20)">📖</button
-          ><br />
+  <br />
           लील्यो ताहि मधुर फल जानू ॥ 18 ॥
         </p>
         <p class="meaning" id="meaning-20">
@@ -301,8 +262,7 @@
 
         <p>
           प्रभु मुद्रिका मेलि मुख माहीं ।
-          <button class="btn-meaning" onclick="toggleMeaning(21)">📖</button
-          ><br />
+  <br />
           जलधि लांघि गए अचरज नाहीं ॥ 19 ॥
         </p>
         <p class="meaning" id="meaning-21">
@@ -312,8 +272,7 @@
 
         <p>
           दुर्गम काज जगत के जेते ।
-          <button class="btn-meaning" onclick="toggleMeaning(22)">📖</button
-          ><br />
+  <br />
           सुगम अनुग्रह तुम्हरे तेते ॥ 20 ॥
         </p>
         <p class="meaning" id="meaning-22">
@@ -323,8 +282,7 @@
 
         <p>
           राम दुआरे तुम रखवारे ।
-          <button class="btn-meaning" onclick="toggleMeaning(23)">📖</button
-          ><br />
+  <br />
           होत न आज्ञा बिनु पैसारे ॥ 21 ॥
         </p>
         <p class="meaning" id="meaning-23">
@@ -334,8 +292,7 @@
 
         <p>
           सब सुख लहै तुम्हारी सरना ।
-          <button class="btn-meaning" onclick="toggleMeaning(24)">📖</button
-          ><br />
+  <br />
           तुम रक्षक काहू को डर ना ॥ 22 ॥
         </p>
         <p class="meaning" id="meaning-24">
@@ -346,8 +303,7 @@
 
         <p>
           आपन तेज सम्हारो आपै ।
-          <button class="btn-meaning" onclick="toggleMeaning(25)">📖</button
-          ><br />
+  <br />
           तीनों लोक हांक तें कांपै ॥ 23 ॥
         </p>
         <p class="meaning" id="meaning-25">
@@ -358,8 +314,7 @@
 
         <p>
           भूत पिशाच निकट नहिं आवै ।
-          <button class="btn-meaning" onclick="toggleMeaning(26)">📖</button
-          ><br />
+  <br />
           महाबीर जब नाम सुनावै ॥ 24 ॥
         </p>
         <p class="meaning" id="meaning-26">
@@ -370,8 +325,7 @@
 
         <p>
           नासै रोग हरै सब पीरा ।
-          <button class="btn-meaning" onclick="toggleMeaning(27)">📖</button
-          ><br />
+  <br />
           जपत निरंतर हनुमत बीरा ॥ 25 ॥
         </p>
         <p class="meaning" id="meaning-27">
@@ -381,8 +335,7 @@
 
         <p>
           संकट तें हनुमान छुड़ावै ।
-          <button class="btn-meaning" onclick="toggleMeaning(28)">📖</button
-          ><br />
+  <br />
           मन क्रम बचन ध्यान जो लावै ॥ 26 ॥
         </p>
         <p class="meaning" id="meaning-28">
@@ -393,8 +346,7 @@
 
         <p>
           सब पर राम तपस्वी राजा ।
-          <button class="btn-meaning" onclick="toggleMeaning(29)">📖</button
-          ><br />
+  <br />
           तिन के काज सकल तुम साजा ॥ 27 ॥
         </p>
         <p class="meaning" id="meaning-29">
@@ -404,8 +356,7 @@
 
         <p>
           और मनोरथ जो कोई लावै ।
-          <button class="btn-meaning" onclick="toggleMeaning(30)">📖</button
-          ><br />
+  <br />
           सोई अमित जीवन फल पावै ॥ 28 ॥
         </p>
         <p class="meaning" id="meaning-30">
@@ -416,8 +367,7 @@
 
         <p>
           चारों जुग परताप तुम्हारा ।
-          <button class="btn-meaning" onclick="toggleMeaning(31)">📖</button
-          ><br />
+  <br />
           है परसिद्ध जगत उजियारा ॥ 29 ॥
         </p>
         <p class="meaning" id="meaning-31">
@@ -427,8 +377,7 @@
 
         <p>
           साधु संत के तुम रखवारे ।
-          <button class="btn-meaning" onclick="toggleMeaning(32)">📖</button
-          ><br />
+  <br />
           असुर निकंदन राम दुलारे ॥ 30 ॥
         </p>
         <p class="meaning" id="meaning-32">
@@ -438,8 +387,7 @@
 
         <p>
           अष्ट सिद्धि नौ निधि के दाता ।
-          <button class="btn-meaning" onclick="toggleMeaning(33)">📖</button
-          ><br />
+  <br />
           अस बर दीन जानकी माता ॥ 31 ॥
         </p>
         <p class="meaning" id="meaning-33">
@@ -449,8 +397,7 @@
 
         <p>
           राम रसायन तुम्हरे पासा ।
-          <button class="btn-meaning" onclick="toggleMeaning(34)">📖</button
-          ><br />
+  <br />
           सदा रहो रघुपति के दासा ॥ 32 ॥
         </p>
         <p class="meaning" id="meaning-34">
@@ -460,8 +407,7 @@
 
         <p>
           तुम्हरे भजन राम को पावै ।
-          <button class="btn-meaning" onclick="toggleMeaning(35)">📖</button
-          ><br />
+  <br />
           जनम जनम के दुख बिसरावै ॥ 33 ॥
         </p>
         <p class="meaning" id="meaning-35">
@@ -471,8 +417,7 @@
 
         <p>
           अंत काल रघुबर पुर जाई ।
-          <button class="btn-meaning" onclick="toggleMeaning(36)">📖</button
-          ><br />
+  <br />
           जहाँ जन्म हरि भक्त कहाई ॥ 34 ॥
         </p>
         <p class="meaning" id="meaning-36">
@@ -483,8 +428,7 @@
 
         <p>
           और देवता चित्त न धरई ।
-          <button class="btn-meaning" onclick="toggleMeaning(37)">📖</button
-          ><br />
+  <br />
           हनुमत सेइ सर्व सुख करई ॥ 35 ॥
         </p>
         <p class="meaning" id="meaning-37">
@@ -495,8 +439,7 @@
 
         <p>
           संकट कटै मिटै सब पीरा ।
-          <button class="btn-meaning" onclick="toggleMeaning(38)">📖</button
-          ><br />
+  <br />
           जो सुमिरै हनुमत बलबीरा ॥ 36 ॥
         </p>
         <p class="meaning" id="meaning-38">
@@ -506,8 +449,7 @@
 
         <p>
           जय जय जय हनुमान गोसाईं ।
-          <button class="btn-meaning" onclick="toggleMeaning(39)">📖</button
-          ><br />
+  <br />
           कृपा करहु गुरु देव की नाईं ॥ 37 ॥
         </p>
         <p class="meaning" id="meaning-39">
@@ -517,8 +459,7 @@
 
         <p>
           जो सत बार पाठ कर कोई ।
-          <button class="btn-meaning" onclick="toggleMeaning(40)">📖</button
-          ><br />
+  <br />
           छूटहि बंदि महा सुख होई ॥ 38 ॥
         </p>
         <p class="meaning" id="meaning-40">
@@ -528,8 +469,7 @@
 
         <p>
           जो यह पढ़ै हनुमान चालीसा ।
-          <button class="btn-meaning" onclick="toggleMeaning(41)">📖</button
-          ><br />
+  <br />
           होय सिद्धि साखी गौरीसा ॥ 39 ॥
         </p>
         <p class="meaning" id="meaning-41">
@@ -540,8 +480,7 @@
 
         <p>
           तुलसीदास सदा हरि चेरा ।
-          <button class="btn-meaning" onclick="toggleMeaning(42)">📖</button
-          ><br />
+  <br />
           कीजै नाथ हृदय महँ डेरा ॥ 40 ॥
         </p>
         <p class="meaning" id="meaning-42">
@@ -551,8 +490,7 @@
 
         <p>
           <strong> पवनतनय संकट हरन, मंगल मूर्ति रूप | </strong>
-          <button class="btn-meaning" onclick="toggleMeaning(43)">📖</button
-          ><br />
+  <br />
           <strong> राम लखन सीता सहित, हृदय बसहु सुर भूप ॥ </strong>
         </p>
         <p class="meaning" id="meaning-43">
@@ -562,14 +500,92 @@
         </p>
       </div>
      
+
+
     </div>
     <script>
-      
-      function toggleMeaning(id) {
-        let meaning = document.getElementById("meaning-" + id);
-        meaning.style.display =
-          meaning.style.display === "none" ? "block" : "none";
+  function toggleAllMeanings() {
+    const meanings = document.querySelectorAll('.meaning');
+    const toggleState = document.getElementById('toggleMeanings').checked;
+
+    meanings.forEach((meaning) => {
+      meaning.style.display = toggleState ? 'block' : 'none';
+    });
+  }
+
+      const audio = new Audio("./hanuman_chalisa.mp3");
+      const seekbar = document.getElementById("seekbar");
+      const currentTimeDisplay = document.getElementById("current-time");
+      const durationDisplay = document.getElementById("duration");
+      let isPlaying = false;
+
+      audio.addEventListener("loadedmetadata", () => {
+        durationDisplay.textContent = formatTime(audio.duration);
+        seekbar.max = audio.duration;
+      });
+
+      audio.addEventListener("timeupdate", () => {
+        seekbar.value = audio.currentTime;
+        currentTimeDisplay.textContent = formatTime(audio.currentTime);
+      });
+
+      audio.addEventListener("ended", () => {
+        playPauseButton.textContent = "Play ▶️";
+        isPlaying = false;
+      });
+
+      function togglePlayPause() {
+        if (isPlaying) {
+          audio.pause();
+          playPauseButton.textContent = "Play ▶️";
+        } else {
+          audio.play();
+          playPauseButton.textContent = "Pause ⏸️";
+        }
+        isPlaying = !isPlaying;
       }
+
+      function seekAudio() {
+        audio.currentTime = seekbar.value;
+      }
+
+      function formatTime(seconds) {
+        const min = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const sec = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${min}:${sec}`;
+      }
+
+      function downloadPDF() {
+    const pdfLink = "https://drive.google.com/file/d/10Tax36Z4ELn4PnlQriNASt70gmXPCJ0k/view?usp=sharing";
+    
+    const anchor = document.createElement('a');
+    anchor.href = pdfLink;
+    anchor.download = "Sri_Hanuman_Chalisa_Hindi.pdf"; // Suggested file name
+    anchor.click();
+    
+    console.log('Download PDF');
+}
+
+
+function shareLink() {
+    const pageTitle = document.title;
+    const pageUrl = window.location.href;
+
+    if (navigator.share) {
+        navigator.share({
+            title: pageTitle,
+            text: "Check out this page!",
+            url: pageUrl
+        })
+        .then(() => console.log('Shared successfully'))
+        .catch((error) => console.error('Error sharing', error));
+    } else {
+        // Fallback if Web Share API is not supported
+        navigator.clipboard.writeText(pageUrl);
+        alert('Link copied to clipboard!');
+    }
+}
+
     </script>
   </body>
 </html>
