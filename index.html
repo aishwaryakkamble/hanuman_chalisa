@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>हनुमान चालीसा</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.jpg">
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&display=swap"
@@ -503,6 +504,12 @@
 
 
     </div>
+
+    <footer>
+      <p class="footer-quote">"राम काज कीन्हें बिनु, मोहि कहां विश्राम"</p>
+      <p>Developed by <a href="https://www.linkedin.com/in/aishwarya-kamble-b664b91b9/" target="_blank">Aishwarya</a> | © 2025</p>
+  </footer>
+
     <script>
   function toggleAllMeanings() {
     const meanings = document.querySelectorAll('.meaning');
@@ -513,7 +520,7 @@
     });
   }
 
-      const audio = new Audio("./hanuman_chalisa.mp3");
+      const audio = new Audio("./hanuman_chalisa.m4a");
       const seekbar = document.getElementById("seekbar");
       const currentTimeDisplay = document.getElementById("current-time");
       const durationDisplay = document.getElementById("duration");
@@ -574,7 +581,7 @@ function shareLink() {
     if (navigator.share) {
         navigator.share({
             title: pageTitle,
-            text: "Check out this page!",
+            text: "Jay Shree Ram. Check out this page for Hanuman Chalisa: ",
             url: pageUrl
         })
         .then(() => console.log('Shared successfully'))

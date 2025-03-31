@@ -124,7 +124,7 @@ input[type="range"] {
 }
 
 .toggle-switch .form-check-input:checked {
-  background-color: #4CAF50;
+  background-color: #ff8800;
 }
 
 .toggle-switch .form-check-input::before {
@@ -153,3 +153,9 @@ input[type="range"] {
 }
 
 
+
+footer { background-color: #ffe4b5; color: #ff7b00; padding: 10px; text-align: center; }
+
+.footer-quote { font-size: 0.9em; font-style: italic; color: #ff8800; margin-top: 5px; }
+
+a { color: #ff6200; text-decoration: none; }
